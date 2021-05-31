@@ -11,7 +11,7 @@ import argparse
 
 options = Options()
 #options.headless = True
-driver = webdriver.Chrome(options=options, executable_path=r'C:\Users\harisw\Documents\chromedriver_win32\chromedriver.exe')
+driver = webdriver.Chrome(options=options, executable_path=r'C:\Users\DBLab\Documents\chromedriver\chromedriver.exe')
 driver.maximize_window()
 parser = argparse.ArgumentParser()
 parser.add_argument("url", help="Specify root link")
@@ -35,7 +35,7 @@ total = driver.find_element_by_class_name("pageCounter").get_attribute('innerHTM
 #total = int(total.split("/")) + 1
 #chapter = main_link.split("=")[1]
 chapter = parser.chapter
-path = "output/"+chapter
+path = "../outputs/"+chapter
 os.mkdir(basename(path))
 old_source = ""
 for page in range(1, 225):
@@ -47,7 +47,7 @@ for page in range(1, 225):
 
 
     print("Chapter " + str(chapter))
-    filename = os.path.join(basename(path), str(page)+".jpg")
+    filename = os.path.join(basename(path), str(bin(page))+".jpg")
     print("Page "+str(filename))
     with open(filename, "wb") as f:
         f.write(requests.get(source).content)
